@@ -11,12 +11,13 @@ html, body {
 .container {
   border: 5px solid yellow;
   display: flex;
+  background-color: #ffeead;
 }
 
 .box-doll {
   flex-grow: 1;
   flex-basis: 200px;
-  background-color: red;
+
 }
 
 .box-interative {

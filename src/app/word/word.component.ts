@@ -9,11 +9,9 @@ import { LetterModel } from '../letter-box/letter.model';
 export class WordComponent implements OnInit {
 
   @Input() word: LetterModel[];
-  @Input() tip: string;
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.word);
   }
 }
