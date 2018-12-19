@@ -1,0 +1,24 @@
+{
+  "words": [
+    {
+      "word": "KUBERNETS",
+      "tip": "Container-Orchestration system"
+    },
+    {
+      "word": "JAVASCRIPT",
+      "tip": "Best Programming Language"
+    },
+    {
+      "word": "ANGULAR",
+      "tip": "Structural framework for dynamic web apps"
+    },
+    {
+      "word": "SONARQUBE",
+      "tip": "Monitor for the health of an application and highlights issues newly introduced"
+    },
+    {
+      "word": "JENKINS",
+      "tip": "Helps to automate the non-human part of the software development process"
+    }
+  ]
+}

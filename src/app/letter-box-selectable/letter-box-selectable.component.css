@@ -1,0 +1,13 @@
+.letter-box {
+  margin: 5px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  border-style: solid;
+}
+
+.letter-box:hover {
+  cursor: pointer;
+  background-color: gray;
+}

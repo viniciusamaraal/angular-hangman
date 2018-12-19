@@ -1,0 +1,12 @@
+div {
+  margin: 15px;
+}
+
+.tip-label {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.tip-content {
+  font-size: 20px;
+}

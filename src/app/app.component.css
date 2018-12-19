@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+}
+
+html, body {
+  box-sizing: border-box;
+  height: 100%;
+  background-color: #ffeead;
+}
+
+.container {
+  border: 5px solid yellow;
+  display: flex;
+}
+
+.box-doll {
+  flex-grow: 1;
+  flex-basis: 200px;
+  background-color: red;
+}
+
+.box-interative {
+  flex-grow: 3;
+  flex-basis: 400px;
+  flex-direction: column;
+}
+
+.box-alphabet {
+  /* background-color: aqua; */
+}
+
+.box-tip {
+  /* background-color: gray; */
+}
+
+.box-attempts {
+  /* background-color: red; */
+}
+
+.box-word {
+  /* background-color: darkgreen; */
+}
