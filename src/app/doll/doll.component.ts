@@ -9,17 +9,23 @@ import { delay } from 'q';
 })
 export class DollComponent implements OnInit {
 
-  public imageId = 1;
+  public imageId: number;
 
-  constructor(private globalEventsService: GlobalEventsService) { }
+  constructor(private globalEventsService: GlobalEventsService) {
+    this.imageId = 1; 
+  }
 
   ngOnInit() {
     this.globalEventsService.eventWrongLetterSelected$.subscribe(letter => {
         this.imageId++;
 
-        if (this.imageId === 7) {
+        if (this.checkLastImage()) {
           this.globalEventsService.gameOver(false);
         }
     });
+  }
+
+  checkLastImage(): boolean {
+    return this.imageId === 7;
   }
 }

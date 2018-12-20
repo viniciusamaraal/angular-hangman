@@ -14,7 +14,6 @@ export class DataService {
   constructor(private http: Http) { }
 
   words(): Observable<Word[]> {
-    console.log('teste ' + WORDS_API);
     return this.http.get(`${ WORDS_API }/words`)
       .map(response => response.json());
   }
