@@ -1,0 +1,6 @@
+.word-content {
+  display: flex;
+  margin: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}

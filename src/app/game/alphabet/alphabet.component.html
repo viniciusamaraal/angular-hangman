@@ -1,0 +1,5 @@
+<div class="alphabet">
+    <div *ngFor="let letter of alphabet">
+        <app-letter-box-selectable [letter]="letter" (selectLetter)="selectLetter($event)" ></app-letter-box-selectable>
+    </div>
+</div>
