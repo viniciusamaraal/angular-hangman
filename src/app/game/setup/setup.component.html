@@ -1,8 +1,8 @@
 
 <div class="content-setup">
   <form [formGroup]="form" (submit)="submit()">
-      {{ form.value | json }} 
-      {{form.valid}}
+      <!-- {{ form.value | json }} 
+      {{form.valid}} -->
 
       <div class="line">
         <div *ngFor="let option of options; let i=index">
@@ -16,25 +16,26 @@
       <div class="line">
         <div class="element">
           <label for="player1">Name P1:</label>
-          <input formControlName="player1" class="form-control text" />
+          <input formControlName="player1" class="form-control text" [readonly]="!canStart" />
           <div *ngIf="player1?.valid">Required</div>
         </div>
         <div *ngIf="form.value.playersCount === 'mult_player'" class="element">
           <label for="player2">Name P2:</label>
-          <input formControlName="player2" class="form-control text" />
+          <input formControlName="player2" class="form-control text" [readonly]="!canStart" />
           <div *ngIf="player2?.valid">Required</div>  
         </div>
       </div>
 
       <div *ngIf="form.value.playersCount === 'mult_player'" class="line">
           <label for="word">Word:</label>
-          <input type="password" formControlName="word" class="form-control text" />
+          <input type="password" formControlName="word" class="form-control text" [readonly]="!canStart" />
           <div *ngIf="word?.valid">Required</div>  
       </div>
 
       <div class="line">
         <div class="actions">
-            <input type="button" name="btnTeste" class="btn-action" value="Start" [disabled]="!form.valid" />
+            <input type="button" name="btnTeste" class="btn-action" value="Start" 
+              (click)="submit()" [disabled]="!form.valid || !canStart" />
         </div>
       </div>
   </form>

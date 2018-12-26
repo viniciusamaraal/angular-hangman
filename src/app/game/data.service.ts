@@ -1,20 +1,34 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { WordsService } from './word.service';
 import { Word } from './word.model';
-import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import { WORDS_API } from '../app.api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor(private http: Http) { }
+  public listOfWords: Word[];
+  public word: string;
+  public tip: string;
+  
+  constructor(private wordsService: WordsService) { }
 
-  words(): Observable<Word[]> {
-    return this.http.get(`${ WORDS_API }/words`)
-      .map(response => response.json());
+  getListOfWordsFromService(): void {
+    this.wordsService.words()
+      .subscribe(retreviedWords => {
+          this.listOfWords = retreviedWords;
+        }
+      );
+  }
+
+  setWordFromService(): void {
+    const sortedIndex = Math.floor(Math.random() * this.listOfWords.length);
+    this.word = this.listOfWords[sortedIndex].word.toUpperCase();
+    this.tip = this.listOfWords[sortedIndex].tip;
+  }
+
+  setWordFromPlayer(typedWord: string, typedTip: string) {
+    this.word = typedWord.toUpperCase();
+    this.tip = typedTip;
   }
 }

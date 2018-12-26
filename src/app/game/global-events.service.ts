@@ -7,20 +7,26 @@ import { LetterModel } from './letter-box/letter.model';
 })
 export class GlobalEventsService {
 
-  private _eventLetterSeleciton = new ReplaySubject<any>(1);
+  private _eventLetterSelection = new ReplaySubject<any>(1);
   private _eventWrongLetterSelected = new ReplaySubject<any>(1);
+  private _eventStartGame = new ReplaySubject<any>(1);
   private _eventGameOver = new ReplaySubject<any>(1);
 
-  public eventLetterSeleciton$ = this._eventLetterSeleciton.asObservable();
+  public eventLetterSeleciton$ = this._eventLetterSelection.asObservable();
   public eventWrongLetterSelected$ = this._eventWrongLetterSelected.asObservable();
+  public eventStartGame$ = this._eventStartGame.asObservable();
   public eventGameOver$ = this._eventGameOver.asObservable();
 
   verifyLetter(letter: LetterModel) {
-    this._eventLetterSeleciton.next(letter);
+    this._eventLetterSelection.next(letter);
   }
 
   updateFailledAttempts(letter: LetterModel) {
     this._eventWrongLetterSelected.next(letter);
+  }
+
+  StartGame() {
+    this._eventStartGame.next();
   }
 
   gameOver(result: boolean) {
