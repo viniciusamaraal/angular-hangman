@@ -1,0 +1,55 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+    margin: 0;
+}
+  
+html, body {
+  box-sizing: border-box;
+  height: 100%;
+  background-color: #ffeead;
+}
+
+.container {
+  border: 5px solid yellow;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: #ffeead;
+}
+
+.line {
+  padding: 15px;
+  display: flex;
+}
+
+.element {
+  flex: 1;
+}
+
+.radio {
+  margin-right: 20px;
+}
+
+.actions {
+  justify-content: right;
+  margin-left: auto;
+}
+
+input {
+  margin-left: 5px;
+}
+
+label {
+  min-width: 100px;
+  display: inline-block;
+}
+
+.text {
+  width: 250px;
+}
+
+.btn-action {
+  min-width: 100px;
+  min-height: 30px;
+}
