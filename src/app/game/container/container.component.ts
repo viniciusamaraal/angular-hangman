@@ -70,5 +70,4 @@ export class ContainerComponent implements OnInit {
         alert(message);
         window.location.reload();
   }
-
 }

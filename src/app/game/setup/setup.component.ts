@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-container',
-  templateUrl: './container.component.html',
-  styleUrls: ['./container.component.css']
+  selector: 'app-setup',
+  templateUrl: './setup.component.html',
+  styleUrls: ['./setup.component.css']
 })
-export class ContainerComponent implements OnInit {
+export class SetupComponent implements OnInit {
 
   public form: FormGroup;
   options = [

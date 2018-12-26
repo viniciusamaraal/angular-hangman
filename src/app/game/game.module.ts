@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { ContainerComponent } from './container/container.component';
 import { LetterBoxComponent } from './letter-box/letter-box.component';
 import { AlphabetComponent } from './alphabet/alphabet.component';
@@ -9,6 +11,7 @@ import { AttemptsComponent } from './attempts/attempts.component';
 import { LetterBoxSelectableComponent } from './letter-box-selectable/letter-box-selectable.component';
 import { TipComponent } from './tip/tip.component';
 import { GameRoutingModule } from './game-routing.module';
+import { SetupComponent } from './setup/setup.component';
 
 @NgModule({
   declarations: [
@@ -19,10 +22,12 @@ import { GameRoutingModule } from './game-routing.module';
     WordComponent,
     AttemptsComponent,
     LetterBoxSelectableComponent,
-    TipComponent 
+    TipComponent,
+    SetupComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     GameRoutingModule
   ],
   exports: [
