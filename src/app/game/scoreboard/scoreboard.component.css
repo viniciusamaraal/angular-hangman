@@ -1,0 +1,26 @@
+.content-scoreboard {
+    display: flex;
+    border: 5px solid yellow;
+    height: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 26px;
+}
+
+.scoreboard-player {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    text-align: center;
+}
+
+.player-name {
+    flex: 2;
+    display: inline;
+    text-align: center; 
+    vertical-align: middle;
+}
+
+.player-points {
+    flex: 1;
+}

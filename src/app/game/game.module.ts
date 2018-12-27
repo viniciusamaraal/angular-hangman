@@ -12,6 +12,7 @@ import { LetterBoxSelectableComponent } from './letter-box-selectable/letter-box
 import { TipComponent } from './tip/tip.component';
 import { GameRoutingModule } from './game-routing.module';
 import { SetupComponent } from './setup/setup.component';
+import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SetupComponent } from './setup/setup.component';
     AttemptsComponent,
     LetterBoxSelectableComponent,
     TipComponent,
-    SetupComponent
+    SetupComponent,
+    ScoreboardComponent
   ],
   imports: [
     CommonModule,

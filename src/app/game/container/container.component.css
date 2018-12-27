@@ -18,9 +18,6 @@ html, body {
   flex-wrap: wrap;
 }
 
-.container-setup {
-}
-
 .box-doll {
   flex-grow: 1;
   flex-basis: 200px;
