@@ -16,7 +16,7 @@ export class SetupComponent implements OnInit {
   public canTypeWord = true;
   public gameStarted = false;
   public gameModeType = GameModeEnum;
-  public playerTime = 0;
+  public playerTime: number;
 
   options = [
     {
@@ -35,6 +35,8 @@ export class SetupComponent implements OnInit {
     private dataService: DataService) { }
 
   ngOnInit() {
+    this.playerTime = this.dataService.playerTimeToAsk;
+    console.log(this.playerTime);
     this.dataService.getListOfWordsFromService();
 
     this.form = this.formBuilder.group({
@@ -72,7 +74,7 @@ export class SetupComponent implements OnInit {
     fldWord.updateValueAndValidity();
   }
 
-  startGame() {
+  public startGame(): void {
     if (this.form.valid) {
       if (!this.gameStarted) {
         const playersCount = this.form.get('playersCount').value;
@@ -94,14 +96,16 @@ export class SetupComponent implements OnInit {
       }
 
       this.globalEventsService.StartGame();
-      //this.form.get('playersCount').disable();
       this.canTypeWord = false;
     }
   }
 
+  // restarts the game after ending a word
   private restartGame(): void {
+    this.dataService.resetVariables();
+    
     if (this.dataService.gameMode == GameModeEnum.MULT_PLAYER) {
-      this.playerTime++;
+      this.playerTime = this.dataService.playerTimeToAsk;
       this.canTypeWord = true;
       
       let word = this.form.get('word');
@@ -111,6 +115,17 @@ export class SetupComponent implements OnInit {
     else {
       this.dataService.setWordFromService();
       this.globalEventsService.StartGame();
+    }
+  }
+
+  // restarts the complete state of the game
+  private resetGame(): void {
+    window.location.reload();
+  }
+
+  private changeGameMode() {
+    if (this.gameStarted) {
+      return false;
     }
   }
 }

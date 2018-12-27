@@ -19,12 +19,14 @@ export class DataService {
   public scorePlayer2: number;
 
   public gameMode: GameModeEnum;
-  public gameCount: number;
   public currentGameErrorsCount: number;
   public currentWordHits: number;
+  public gameCount: number = 0;
   public playerTimeToAsk: number = 0;
   
-  constructor(private globalEventsService: GlobalEventsService, private wordsService: WordsService) { }
+  constructor(private globalEventsService: GlobalEventsService, private wordsService: WordsService) { 
+    this.resetVariables();
+  }
 
   public getListOfWordsFromService(): void {
     this.wordsService.words()
@@ -39,7 +41,8 @@ export class DataService {
     this.namePlayer2 = name2;
     this.scorePlayer1 = 0;
     this.scorePlayer2 = 0;
-    this.resetVariables();
+    this.currentGameErrorsCount = 0;
+    this.currentWordHits = 0;
 
     this.gameMode = gameMode;
   }
@@ -60,7 +63,6 @@ export class DataService {
     const endWinner = this.currentWordHits == this.word.length;
 
     if (endLoser || endWinner) {
-      this.resetVariables();
       this.globalEventsService.gameOver(endLoser ? false : true);
     }
   }
@@ -75,6 +77,6 @@ export class DataService {
   }
 
   public checkPlayer1TimeToAsk(): boolean {
-    return this.playerTimeToAsk % 2 == 0;
+    return this.playerTimeToAsk % 2 != 0;
   }
 }

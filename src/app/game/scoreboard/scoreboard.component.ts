@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GlobalEventsService } from '../global-events.service';
 import { DataService } from '../data.service';
+import { GameModeEnum } from '../game-mode.enum';
 
 @Component({
   selector: 'app-scoreboard',
@@ -28,14 +29,23 @@ export class ScoreboardComponent implements OnInit {
   }
 
   updateScoreBoard(discovered: boolean) {
-    if (discovered) {
-      if (this.dataService.checkPlayer1TimeToAsk()) {
-        this.scorePlayer2 = this.dataService.scorePlayer2 = this.dataService.scorePlayer2 + 1;
+    if (this.dataService.gameMode == GameModeEnum.MULT_PLAYER) {
+      if (discovered) {
+        if (this.dataService.checkPlayer1TimeToAsk()) {
+          this.scorePlayer2 = this.dataService.scorePlayer2 = this.dataService.scorePlayer2 + 1;
+        } else {
+          this.scorePlayer1 = this.dataService.scorePlayer1 = this.dataService.scorePlayer1 + 1;
+        }
       } else {
-        this.scorePlayer1 = this.dataService.scorePlayer1 = this.dataService.scorePlayer1 + 1;
+        if (this.dataService.checkPlayer1TimeToAsk()) {
+          this.scorePlayer1 = this.dataService.scorePlayer1 = this.dataService.scorePlayer1 + 1;
+        } else {
+          this.scorePlayer2 = this.dataService.scorePlayer2 = this.dataService.scorePlayer2 + 1;
+        }
       }
-    } else {
-      if (this.dataService.checkPlayer1TimeToAsk()) {
+    }
+    else {
+      if (discovered) {
         this.scorePlayer1 = this.dataService.scorePlayer1 = this.dataService.scorePlayer1 + 1;
       } else {
         this.scorePlayer2 = this.dataService.scorePlayer2 = this.dataService.scorePlayer2 + 1;

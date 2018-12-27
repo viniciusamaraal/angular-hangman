@@ -6,7 +6,8 @@
       <div class="line">
         <div *ngFor="let option of options; let i=index">
           <div class="radio">
-            <input type="radio" class="form-control" formControlName="playersCount" value="{{option.id}}" />
+            <input type="radio" class="form-control" formControlName="playersCount" 
+              value="{{option.id}}" (click)="changeGameMode()" />
             <label for="radio-{{option.id}}">{{option.description}}</label>
           </div>
         </div>
@@ -26,7 +27,7 @@
       </div>
 
       <div *ngIf="form.value.playersCount == gameModeType.MULT_PLAYER" class="line word">
-          <label for="word">Player {{ playerTime % 2 == 0 ? '1' : '2' }}, type the word:</label>
+          <label for="word">Player {{ playerTime % 2 != 0 ? '1' : '2' }}, type the word:</label>
           <input type="password" formControlName="word" class="form-control text" [readonly]="!canTypeWord" />
           <div *ngIf="word?.valid">Required</div>  
       </div>
@@ -35,6 +36,8 @@
         <div class="actions">
             <input type="button" name="btnTeste" class="btn-action" value="Start" 
               (click)="startGame()" [disabled]="!form.valid || !canTypeWord" />
+            <input type="button" name="btnResetGame" class="btn-action" value="Reset" 
+              (click)="resetGame()" />
         </div>
       </div>
   </form>
