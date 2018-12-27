@@ -3,12 +3,12 @@
         <app-setup>
         </app-setup>
     </div>
-    <div *ngIf="word.length > 0">
-        <div class="box-scoreboard">
+    <div>
+        <div *ngIf="gameStartedAtLeastOnce" class="box-scoreboard">
             <app-scoreboard>
             </app-scoreboard>
         </div>
-        <div class="container-game">
+        <div *ngIf="word.length > 0" class="container-game">
             <div class="box-interative">
                 <div class="box-alphabet">
                     <app-alphabet>

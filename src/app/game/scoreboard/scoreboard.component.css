@@ -17,6 +17,7 @@
 .player-name {
     flex: 2;
     display: inline;
+    font-weight: bold;
     text-align: center; 
     vertical-align: middle;
 }

@@ -18,14 +18,10 @@ export class DollComponent implements OnInit {
   ngOnInit() {
     this.globalEventsService.eventWrongLetterSelected$.subscribe(letter => {
         this.imageId++;
-
-        if (this.checkLastImage()) {
-          this.globalEventsService.gameOver(false);
-        }
     });
-  }
 
-  checkLastImage(): boolean {
-    return this.imageId === 7;
+    this.globalEventsService.eventGameOver$.subscribe(result => {
+      this.imageId = 1;
+    });
   }
 }

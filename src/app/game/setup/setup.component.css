@@ -15,8 +15,8 @@
 }
 
 .btn-action {
-  min-width: 100px;
-  min-height: 30px;
+  width: 100px;
+  height: 30px;
 }
 
 .radio {
@@ -28,10 +28,10 @@ input {
 }
 
 label {
-  min-width: 100px;
+  width: 200px;
   display: inline-block;
 }
 
 .text {
-  width: 250px;
+  width: 200px;
 }

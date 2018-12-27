@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GlobalEventsService } from '../global-events.service';
+import { LetterModel } from '../letter-box/letter.model';
 
 @Component({
   selector: 'app-attempts',
@@ -13,8 +14,20 @@ export class AttemptsComponent implements OnInit {
   constructor(private globalEventsService: GlobalEventsService) { }
 
   ngOnInit() {
-    this.globalEventsService.eventWrongLetterSelected$.subscribe(letter => {
-      this.failledAttempts.push(letter.value);
+    this.globalEventsService.eventStartGame$.subscribe(()=>{
+      this.resetFailledAttempts();
     });
+
+    this.globalEventsService.eventWrongLetterSelected$.subscribe(letter => {
+      this.insertNewFailledAttempt(letter);
+    });
+  }
+
+  private resetFailledAttempts(): void {
+    this.failledAttempts = [];
+  }
+
+  private insertNewFailledAttempt(letter: LetterModel): void {
+    this.failledAttempts.push(letter.value);
   }
 }

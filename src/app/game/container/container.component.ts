@@ -14,11 +14,30 @@ export class ContainerComponent implements OnInit {
 
   public word: LetterModel[] = [];
   public tip: string;
+  public gameStartedAtLeastOnce: boolean;
 
   constructor(private globalEventsService: GlobalEventsService, private dataService: DataService) {
+    
   }
 
-  loadWord(): void {
+  ngOnInit() {
+    this.globalEventsService.eventLetterSeleciton$.subscribe(letter => {
+      this.checkSelectedLetter(letter);
+    });
+
+    this.globalEventsService.eventStartGame$.subscribe(()=>{
+      this.gameStartedAtLeastOnce = true;
+      this.loadWord();
+    });
+
+    this.globalEventsService.eventGameOver$.subscribe(()=>{
+      this.clear();
+    });
+  }
+
+  private loadWord(): void {
+    this.word = [];
+  
     var splitedWord = this.dataService.word.split('');
     splitedWord.forEach((element, index) => {
       this.word.push({ value: splitedWord[index], display: false });
@@ -26,49 +45,27 @@ export class ContainerComponent implements OnInit {
     this.tip = this.dataService.tip;
   }
 
-  registerEvents() {
-    this.globalEventsService.eventLetterSeleciton$.subscribe(letter => {
-      let letterFound = false;
-      let anyHidden = false;
+  private checkSelectedLetter(letter: LetterModel): void {
+    let letterFound = false;
 
-      this.word.forEach((element, index) => {
-        if (this.word[index].value === letter.value) {
-          this.word[index].display = true;
-          letterFound = true;
-        }
-
-        if (!this.word[index].display) {
-          anyHidden = true;
-        }
-      });
-      
-      console.log(letter.value);
-      
-      if (!letterFound) {
-        this.globalEventsService.updateFailledAttempts(letter);
-      } else {
-        if (!anyHidden) {
-          this.emitMessageGameOver(true);
-        }
+    this.word.forEach((element, index) => {
+      if (this.word[index].value === letter.value) {
+        this.word[index].display = true;
+        this.dataService.currentWordHits++;
+        letterFound = true;
       }
     });
+    
+    if (!letterFound) {
+      this.dataService.currentGameErrorsCount++;
+      this.globalEventsService.updateFailledAttempts(letter);
+    } 
 
-    this.globalEventsService.eventStartGame$.subscribe(()=>{
-      this.loadWord();
-    });
-
-    this.globalEventsService.eventGameOver$.subscribe(result => {
-      this.emitMessageGameOver(result);
-    });
+    this.dataService.checkGameOver();
   }
 
-  ngOnInit(): void {
-    this.registerEvents();
-  }
-
-  emitMessageGameOver(result: boolean) {
-    const message = result ? 'Congratulations, you win! \\o/' : 'Game over! Try again...';
-    alert(message);
-    window.location.reload();
+  private clear(): void {
+    this.word = [];
+    this.tip = '';
   }
 }

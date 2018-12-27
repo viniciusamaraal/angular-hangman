@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalEventsService } from '../global-events.service';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-scoreboard',
@@ -7,18 +9,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScoreboardComponent implements OnInit {
 
-  private player1Name: string;
-  private player1Points: string;
-  private player2Name: string;
-  private player2Points: string;
+  private namePlayer1: string;
+  private scorePlayer1: number;
+  private namePlayer2: string;
+  private scorePlayer2: number;
   
-  constructor() { }
+  constructor(private globalEventsService: GlobalEventsService, private dataService: DataService) { }
 
   ngOnInit() {
-    this.player1Name = "Vinicius";
-    this.player2Name = "Machine";
-    this.player1Points = "2";
-    this.player2Points = "0";
+    this.namePlayer1 = this.dataService.namePlayer1;
+    this.scorePlayer1 = this.dataService.scorePlayer1;
+    this.namePlayer2 = this.dataService.namePlayer2;
+    this.scorePlayer2 = this.dataService.scorePlayer2;
+
+    this.globalEventsService.eventGameOver$.subscribe(result => {
+      this.updateScoreBoard(result);
+    });
   }
 
+  updateScoreBoard(discovered: boolean) {
+    if (discovered) {
+      if (this.dataService.checkPlayer1TimeToAsk()) {
+        this.scorePlayer2 = this.dataService.scorePlayer2 = this.dataService.scorePlayer2 + 1;
+      } else {
+        this.scorePlayer1 = this.dataService.scorePlayer1 = this.dataService.scorePlayer1 + 1;
+      }
+    } else {
+      if (this.dataService.checkPlayer1TimeToAsk()) {
+        this.scorePlayer1 = this.dataService.scorePlayer1 = this.dataService.scorePlayer1 + 1;
+      } else {
+        this.scorePlayer2 = this.dataService.scorePlayer2 = this.dataService.scorePlayer2 + 1;
+      }
+    }
+  }
 }
