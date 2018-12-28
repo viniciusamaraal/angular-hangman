@@ -12,7 +12,6 @@ export class AttemptsComponent implements OnInit, OnDestroy {
 
   public failledAttempts: string[] = [];
 
-  private eventGameStartSubscription: Subscription;
   private eventWrongLetterSelectedSubscription: Subscription;
 
   constructor(private globalEventsService: GlobalEventsService) { }
@@ -26,7 +25,6 @@ export class AttemptsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.eventGameStartSubscription.unsubscribe();
     this.eventWrongLetterSelectedSubscription.unsubscribe();
   }
 

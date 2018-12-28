@@ -15,6 +15,8 @@ export class ScoreboardComponent implements OnInit, OnDestroy {
   private scorePlayer1: number;
   private namePlayer2: string;
   private scorePlayer2: number;
+  private message: string;
+  private player1Win: boolean;
 
   private eventGameOverSubscription: Subscription;
   
@@ -26,8 +28,9 @@ export class ScoreboardComponent implements OnInit, OnDestroy {
     this.namePlayer2 = this.dataService.namePlayer2;
     this.scorePlayer2 = this.dataService.scorePlayer2;
 
-    this.eventGameOverSubscription = this.globalEventsService.eventGameOver$.subscribe(result => {
-      this.updateScoreBoard(result);
+    this.eventGameOverSubscription = this.globalEventsService.eventGameOver$.subscribe(data => {
+      this.updateScoreBoard(data.discovered);
+      this.updateMessage(data.discovered, data.word);
     });
   }
 
@@ -58,5 +61,16 @@ export class ScoreboardComponent implements OnInit, OnDestroy {
         this.scorePlayer2 = this.dataService.scorePlayer2 = this.dataService.scorePlayer2 + 1;
       }
     }
+  }
+
+  updateMessage(discovered: boolean, word: string) {
+    if (this.dataService.gameMode == GameModeEnum.SINGLE_PLAYER) {
+      this.player1Win = discovered;
+    } else {
+      let player1TimeToAsk = this.dataService.checkPlayer1TimeToAsk();
+      this.player1Win = 
+            (player1TimeToAsk && !discovered) ||
+            (!player1TimeToAsk && discovered);
+    } 
   }
 }

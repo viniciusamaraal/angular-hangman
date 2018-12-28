@@ -13,10 +13,8 @@ export class DollComponent implements OnInit, OnDestroy {
   public imageId: number;
 
   private eventWrongLetterSelectedSubscription: Subscription;
-  private eventGameOverSubscription: Subscription;
 
   constructor(private globalEventsService: GlobalEventsService) {
-    this.imageId = 1; 
   }
 
   ngOnInit() {
@@ -29,6 +27,5 @@ export class DollComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.eventWrongLetterSelectedSubscription.unsubscribe();
-    this.eventGameOverSubscription.unsubscribe();
   }
 }

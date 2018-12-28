@@ -26,7 +26,6 @@ export class ContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('container created...');
     this.eventLetterSelecitonSubscription = this.globalEventsService.eventLetterSeleciton$.subscribe(letter => {
       this.checkSelectedLetter(letter);
     });

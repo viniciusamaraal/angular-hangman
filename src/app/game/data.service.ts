@@ -42,9 +42,11 @@ export class DataService {
   }
 
   public setWordFromPlayer(typedWord: string, typedTip: string): void {
+    this.resetVariables();
+
     this.word = typedWord.toUpperCase();
     this.tip = typedTip;
-
+    
     this.globalEventsService.startGame();
   }
 
@@ -53,10 +55,13 @@ export class DataService {
       .subscribe(retreviedWords => {
           this.listOfWords = retreviedWords;
 
+          this.resetVariables();
+
           const sortedIndex = Math.floor(Math.random() * this.listOfWords.length);
           this.word = this.listOfWords[sortedIndex].word.toUpperCase();
           this.tip = this.listOfWords[sortedIndex].tip;
 
+          
           this.globalEventsService.startGame();
         }
       );
@@ -68,7 +73,7 @@ export class DataService {
     const gameIsOver = endLoser || endWinner;
 
     if (gameIsOver) {
-      this.globalEventsService.gameOver(!endLoser);
+      this.globalEventsService.gameOver(!endLoser, this.word);
     }
 
     return gameIsOver;
@@ -84,6 +89,6 @@ export class DataService {
   }
 
   public checkPlayer1TimeToAsk(): boolean {
-    return this.playerTimeToAsk % 2 != 0;
+    return this.playerTimeToAsk % 2 == 0;
   }
 }

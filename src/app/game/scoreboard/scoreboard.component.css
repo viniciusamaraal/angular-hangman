@@ -9,9 +9,18 @@
 
 .scoreboard-player {
     display: flex;
-    flex: 1;
+    flex: 5;
     align-items: center;
     text-align: center;
+}
+
+.scoreboard-division {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 26px;
 }
 
 .player-name {
@@ -24,4 +33,12 @@
 
 .player-points {
     flex: 1;
+}
+
+.player-win {
+    color: green;
+}
+
+.player-lose {
+    color: red;
 }

@@ -29,7 +29,7 @@ export class GlobalEventsService {
     this._eventStartGame.next();
   }
 
-  gameOver(result: boolean) {
-    this._eventGameOver.next(result);
+  gameOver(result: boolean, word: string) {
+    this._eventGameOver.next({ discovered: result, word: word });
   }
 }

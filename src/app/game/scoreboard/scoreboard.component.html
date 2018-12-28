@@ -1,18 +1,21 @@
 <div class="content-scoreboard">
-    <div class="scoreboard-player">
-      <div class="player-info player-name">
-        {{ namePlayer1 }}
-      </div>
-      <div class="player-info player-points">
-        {{ scorePlayer1 }}
-      </div>
+  <div class="scoreboard-player" [class.player-win]="player1Win == true" [class.player-lose]="player1Win == false">
+    <div class="player-info player-name">
+      {{ namePlayer1 }}
     </div>
-    <div class="scoreboard-player">
-      <div class="player-info player-name">
-        {{ namePlayer2 }}
-      </div>
-      <div class="player-info player-points">
-        {{ scorePlayer2 }}
-      </div>   
+    <div class="player-info player-points">
+      {{ scorePlayer1 }}
     </div>
   </div>
+  <div class="scoreboard-division">
+    X
+  </div>
+  <div class="scoreboard-player" [class.player-win]="player1Win == false" [class.player-lose]="player1Win == true">
+    <div class="player-info player-points">
+      {{ scorePlayer2 }}
+    </div>  
+    <div class="player-info player-name">
+      {{ namePlayer2 }}
+    </div> 
+  </div>
+</div>

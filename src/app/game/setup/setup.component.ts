@@ -125,8 +125,6 @@ export class SetupComponent implements OnInit {
 
   // restarts the game after ending a word
   private restartGame(): void {
-    this.dataService.resetVariables();
-    
     if (this.dataService.gameMode == GameModeEnum.MULT_PLAYER) {
       this.playerTime = this.dataService.playerTimeToAsk;
       this.canTypeWord = true;

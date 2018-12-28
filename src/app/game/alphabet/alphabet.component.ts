@@ -12,8 +12,6 @@ export class AlphabetComponent implements OnInit, OnDestroy {
   
   public alphabet: LetterModel[] = [];
 
-  private eventStartGameSubscription: Subscription;
-
   constructor(private globalEventsService: GlobalEventsService) { }
 
   ngOnInit() {
@@ -21,7 +19,6 @@ export class AlphabetComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.eventStartGameSubscription.unsubscribe();
   }
 
   private loadAlphabet(): void {
