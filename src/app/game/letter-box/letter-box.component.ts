@@ -9,10 +9,12 @@ import { LetterModel } from './letter.model';
 export class LetterBoxComponent implements OnInit {
 
   @Input() letter: LetterModel;
+  public isWhitespace: boolean;
 
   constructor() { }
 
   ngOnInit() {
-
+    this.isWhitespace = this.letter.value === ' ';
+    console.log(this.isWhitespace);
   }
 }

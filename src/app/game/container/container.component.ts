@@ -37,10 +37,10 @@ export class ContainerComponent implements OnInit {
 
   private loadWord(): void {
     this.word = [];
-  
+    
     var splitedWord = this.dataService.word.split('');
     splitedWord.forEach((element, index) => {
-      this.word.push({ value: splitedWord[index], display: false });
+      this.word.push({ value: splitedWord[index], display:  false });
     });
     this.tip = this.dataService.tip;
   }

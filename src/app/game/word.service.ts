@@ -13,8 +13,8 @@ export class WordsService {
 
   constructor(private http: Http) { }
 
-  words(): Observable<Word[]> {
-    return this.http.get(`${ WORDS_API }/words`)
+  words(category: string): Observable<Word[]> {
+    return this.http.get(`${ WORDS_API }/words?category=${category}`)
       .map(response => response.json());
   }
 }

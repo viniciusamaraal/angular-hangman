@@ -1,14 +1,14 @@
 
 <div class="content-setup">
   <form [formGroup]="form">
-      <!-- {{ form.value | json }} {{form.valid}} -->
+      {{ form.value | json }} {{form.valid}}
 
       <div class="line">
         <div *ngFor="let option of options; let i=index">
           <div class="radio">
             <input type="radio" class="form-control" formControlName="playersCount" 
               value="{{option.id}}" (click)="changeGameMode()" />
-            <label for="radio-{{option.id}}">{{option.description}}</label>
+            <label for="radio-{{option.id}}" class="label-radio">{{option.description}}</label>
           </div>
         </div>
       </div>
@@ -30,6 +30,16 @@
           <label for="word">Player {{ playerTime % 2 != 0 ? '1' : '2' }}, type the word:</label>
           <input type="password" formControlName="word" class="form-control text" [readonly]="!canTypeWord" />
           <div *ngIf="word?.valid">Required</div>  
+      </div>
+
+      <div *ngIf="form.value.playersCount == gameModeType.SINGLE_PLAYER" class="line">
+        <div *ngFor="let category of categories; let i=index">
+          <div class="radio">
+            <input type="radio" class="form-control" formControlName="category" 
+              value="{{category.id}}" (click)="changeCategory()" />
+            <label for="radio-{{category.id}}" class="label-radio">{{category.description}}</label>
+          </div>
+        </div>
       </div>
 
       <div class="line">

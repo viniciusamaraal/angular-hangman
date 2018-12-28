@@ -1,24 +1,54 @@
 {
   "words": [
     {
-      "word": "KUBERNETS",
-      "tip": "Container-Orchestration system"
+      "word": "ZLATAN IBRAHIMOVIC",
+      "tip": "Swedish professional footballer who plays as a forward for LA Galaxy.",
+      "category": "1"
     },
     {
-      "word": "JAVASCRIPT",
-      "tip": "Best Programming Language"
+      "word": "THOMAS EDISON",
+      "tip": " American inventor and businessman, who has been described as America's greatest inventor.",
+      "category": "1"
+    },
+    {
+      "word": "CHINA",
+      "tip": "World's most populous country.",
+      "category": "2"
+    },
+    {
+      "word": "POLONIA",
+      "tip": "My currency is the Złoty.",
+      "category": "2"
+    },
+    {
+      "word": "KUBERNETS",
+      "tip": "Container-Orchestration system",
+      "category": "3"
     },
     {
       "word": "ANGULAR",
-      "tip": "Structural framework for dynamic web apps"
+      "tip": "Structural framework for dynamic web apps",
+      "category": "3"
     },
     {
       "word": "SONARQUBE",
-      "tip": "Monitor for the health of an application and highlights issues newly introduced"
+      "tip": "Monitor for the health of an application and highlights issues newly introduced",
+      "category": "3"
     },
     {
       "word": "JENKINS",
-      "tip": "Helps to automate the non-human part of the software development process"
+      "tip": "Helps to automate the non-human part of the software development process",
+      "category": "3"
+    },
+    {
+      "word": "Hydrometer",
+      "tip": "Instrument used for measuring the relative density of liquids based on the concept of buoyancy. ",
+      "category": "4"
+    },
+    {
+      "word": "TACHOGRAPH",
+      "tip": "Device fitted to a vehicle that automatically records its speed and distance, together with the driver's activity selected from a choice of modes.",
+      "category": "4"
     }
   ]
 }

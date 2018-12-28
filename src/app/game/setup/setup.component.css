@@ -29,7 +29,12 @@ input {
 
 label {
   width: 200px;
+  font-weight: bold;
   display: inline-block;
+}
+
+.label-radio {
+  margin-left: 5px;
 }
 
 .text {

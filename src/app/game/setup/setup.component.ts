@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { DataService } from '../data.service';
 import { GlobalEventsService } from '../global-events.service';
 import { GameModeEnum } from '../game-mode.enum';
+import { CategoryEnum } from '../category.enum';
 
 @Component({
   selector: 'app-setup',
@@ -29,6 +30,29 @@ export class SetupComponent implements OnInit {
     }
   ];
 
+  categories = [
+    {
+      id: CategoryEnum.ALL,
+      description: "All"
+    },
+    {
+      id: CategoryEnum.PEOPLE,
+      description: "People"
+    },
+    {
+      id: CategoryEnum.PLACES,
+      description: "Places"
+    },
+    {
+      id: CategoryEnum.TECHNOLOGY,
+      description:  "Technology"
+    },
+    {
+      id: CategoryEnum.THINGS,
+      description: "Things"
+    }
+  ];
+
   constructor(
     private formBuilder: FormBuilder, 
     private globalEventsService: GlobalEventsService,
@@ -36,14 +60,13 @@ export class SetupComponent implements OnInit {
 
   ngOnInit() {
     this.playerTime = this.dataService.playerTimeToAsk;
-    console.log(this.playerTime);
-    this.dataService.getListOfWordsFromService();
-
+    
     this.form = this.formBuilder.group({
       player1: [ '', Validators.required ],
       player2: [ '' ], 
       word: [ '' ],
-      playersCount: new FormControl(GameModeEnum.SINGLE_PLAYER)
+      playersCount: new FormControl(GameModeEnum.SINGLE_PLAYER),
+      category: new FormControl(CategoryEnum.ALL)
     });
 
     this.form.get('playersCount').valueChanges.subscribe(value => 
@@ -78,15 +101,16 @@ export class SetupComponent implements OnInit {
     if (this.form.valid) {
       if (!this.gameStarted) {
         const playersCount = this.form.get('playersCount').value;
+        const category = this.form.get('category').value;
         const namePlayer1 = this.form.get('player1').value;
         let namePlayer2 = this.form.get('player2').value;
         namePlayer2 = namePlayer2 ? namePlayer2 : 'MACHINE';
 
-        this.dataService.setupGame(namePlayer1.toUpperCase(), namePlayer2.toUpperCase(), playersCount);
+        this.dataService.setupGame(namePlayer1.toUpperCase(), namePlayer2.toUpperCase(), playersCount, category);
 
         this.gameStarted = true;
       }
-
+      
       if (this.dataService.gameMode == GameModeEnum.MULT_PLAYER) {
         const typedWord = this.form.get('word').value;
         this.dataService.setWordFromPlayer(typedWord, 'Multi player game doesn\'t need tips.');
@@ -95,7 +119,6 @@ export class SetupComponent implements OnInit {
         this.dataService.setWordFromService();
       }
 
-      this.globalEventsService.StartGame();
       this.canTypeWord = false;
     }
   }
@@ -127,5 +150,15 @@ export class SetupComponent implements OnInit {
     if (this.gameStarted) {
       return false;
     }
+
+    return true;
+  }
+
+  private changeCategory() {
+    if (this.gameStarted) {
+      return false;
+    }
+
+    return true;
   }
 }

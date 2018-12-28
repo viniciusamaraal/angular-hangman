@@ -3,8 +3,14 @@
   align-items: center;
   justify-content: center;
   margin: 5px;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-style: solid;
   background-color: white;
+}
+
+.whitespace {
+  margin: 5px;
+  width: 30px;
+  height: 30px;
 }

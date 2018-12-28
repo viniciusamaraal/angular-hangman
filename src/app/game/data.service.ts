@@ -9,7 +9,7 @@ import { GlobalEventsService } from './global-events.service';
 })
 export class DataService {
 
-  public listOfWords: Word[];
+  public listOfWords: Word[] = [];
   public word: string;
   public tip: string;
 
@@ -17,6 +17,7 @@ export class DataService {
   public namePlayer2: string;
   public scorePlayer1: number;
   public scorePlayer2: number;
+  public category: string;
 
   public gameMode: GameModeEnum;
   public currentGameErrorsCount: number;
@@ -28,34 +29,37 @@ export class DataService {
     this.resetVariables();
   }
 
-  public getListOfWordsFromService(): void {
-    this.wordsService.words()
-      .subscribe(retreviedWords => {
-          this.listOfWords = retreviedWords;
-        }
-      );
-  }
-
-  public setupGame(name1: string, name2: string, gameMode: GameModeEnum): void {
+  public setupGame(name1: string, name2: string, gameMode: GameModeEnum, category: string): void {
     this.namePlayer1 = name1;
     this.namePlayer2 = name2;
     this.scorePlayer1 = 0;
     this.scorePlayer2 = 0;
     this.currentGameErrorsCount = 0;
     this.currentWordHits = 0;
+    this.category = category;
 
     this.gameMode = gameMode;
-  }
-
-  public setWordFromService(): void {
-    const sortedIndex = Math.floor(Math.random() * this.listOfWords.length);
-    this.word = this.listOfWords[sortedIndex].word.toUpperCase();
-    this.tip = this.listOfWords[sortedIndex].tip;
   }
 
   public setWordFromPlayer(typedWord: string, typedTip: string): void {
     this.word = typedWord.toUpperCase();
     this.tip = typedTip;
+
+    this.globalEventsService.StartGame();
+  }
+
+  public setWordFromService(): void {
+    this.wordsService.words(this.category)
+      .subscribe(retreviedWords => {
+          this.listOfWords = retreviedWords;
+
+          const sortedIndex = Math.floor(Math.random() * this.listOfWords.length);
+          this.word = this.listOfWords[sortedIndex].word.toUpperCase();
+          this.tip = this.listOfWords[sortedIndex].tip;
+
+          this.globalEventsService.StartGame();
+        }
+      );
   }
 
   public checkGameOver(): void {
