@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GlobalEventsService } from '../global-events.service';
 import { DataService } from '../data.service';
 import { GameModeEnum } from '../game-mode.enum';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-scoreboard',
   templateUrl: './scoreboard.component.html',
   styleUrls: ['./scoreboard.component.css']
 })
-export class ScoreboardComponent implements OnInit {
-
+export class ScoreboardComponent implements OnInit, OnDestroy {
+  
   private namePlayer1: string;
   private scorePlayer1: number;
   private namePlayer2: string;
   private scorePlayer2: number;
+
+  private eventGameOverSubscription: Subscription;
   
   constructor(private globalEventsService: GlobalEventsService, private dataService: DataService) { }
 
@@ -23,9 +26,13 @@ export class ScoreboardComponent implements OnInit {
     this.namePlayer2 = this.dataService.namePlayer2;
     this.scorePlayer2 = this.dataService.scorePlayer2;
 
-    this.globalEventsService.eventGameOver$.subscribe(result => {
+    this.eventGameOverSubscription = this.globalEventsService.eventGameOver$.subscribe(result => {
       this.updateScoreBoard(result);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.eventGameOverSubscription.unsubscribe();
   }
 
   updateScoreBoard(discovered: boolean) {

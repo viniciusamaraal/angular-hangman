@@ -65,8 +65,8 @@ export class SetupComponent implements OnInit {
       player1: [ '', Validators.required ],
       player2: [ '' ], 
       word: [ '' ],
-      playersCount: new FormControl(GameModeEnum.SINGLE_PLAYER),
-      category: new FormControl(CategoryEnum.ALL)
+      playersCount: [ GameModeEnum.SINGLE_PLAYER ],
+      category: [ CategoryEnum.ALL ]
     });
 
     this.form.get('playersCount').valueChanges.subscribe(value => 
@@ -137,7 +137,6 @@ export class SetupComponent implements OnInit {
     }
     else {
       this.dataService.setWordFromService();
-      this.globalEventsService.StartGame();
     }
   }
 
@@ -147,18 +146,10 @@ export class SetupComponent implements OnInit {
   }
 
   private changeGameMode() {
-    if (this.gameStarted) {
-      return false;
-    }
-
-    return true;
+    return !this.gameStarted;
   }
 
   private changeCategory() {
-    if (this.gameStarted) {
-      return false;
-    }
-
-    return true;
+    return !this.gameStarted;
   }
 }

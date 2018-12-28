@@ -45,7 +45,7 @@ export class DataService {
     this.word = typedWord.toUpperCase();
     this.tip = typedTip;
 
-    this.globalEventsService.StartGame();
+    this.globalEventsService.startGame();
   }
 
   public setWordFromService(): void {
@@ -57,18 +57,21 @@ export class DataService {
           this.word = this.listOfWords[sortedIndex].word.toUpperCase();
           this.tip = this.listOfWords[sortedIndex].tip;
 
-          this.globalEventsService.StartGame();
+          this.globalEventsService.startGame();
         }
       );
   }
 
-  public checkGameOver(): void {
+  public checkGameOver(): boolean {
     const endLoser = this.currentGameErrorsCount === 6;
     const endWinner = this.currentWordHits == this.word.length;
+    const gameIsOver = endLoser || endWinner;
 
-    if (endLoser || endWinner) {
-      this.globalEventsService.gameOver(endLoser ? false : true);
+    if (gameIsOver) {
+      this.globalEventsService.gameOver(!endLoser);
     }
+
+    return gameIsOver;
   }
 
   public resetVariables(): void {

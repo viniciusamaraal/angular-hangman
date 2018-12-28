@@ -15,6 +15,5 @@ export class LetterBoxComponent implements OnInit {
 
   ngOnInit() {
     this.isWhitespace = this.letter.value === ' ';
-    console.log(this.isWhitespace);
   }
 }

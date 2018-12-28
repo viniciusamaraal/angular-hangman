@@ -13,5 +13,6 @@ export class WordComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 }

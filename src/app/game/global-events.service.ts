@@ -6,11 +6,11 @@ import { LetterModel } from './letter-box/letter.model';
   providedIn: 'root'
 })
 export class GlobalEventsService {
-
-  private _eventLetterSelection = new ReplaySubject<any>(1);
-  private _eventWrongLetterSelected = new ReplaySubject<any>(1);
-  private _eventStartGame = new ReplaySubject<any>(1);
-  private _eventGameOver = new ReplaySubject<any>(1);
+  
+  private _eventLetterSelection = new Subject<any>();
+  private _eventWrongLetterSelected = new Subject<any>();
+  private _eventStartGame = new Subject<any>();
+  private _eventGameOver = new Subject<any>();
 
   public eventLetterSeleciton$ = this._eventLetterSelection.asObservable();
   public eventWrongLetterSelected$ = this._eventWrongLetterSelected.asObservable();
@@ -25,7 +25,7 @@ export class GlobalEventsService {
     this._eventWrongLetterSelected.next(letter);
   }
 
-  StartGame() {
+  startGame() {
     this._eventStartGame.next();
   }
 

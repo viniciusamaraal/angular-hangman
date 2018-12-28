@@ -1,43 +1,48 @@
 
 <div class="content-setup">
   <form [formGroup]="form">
-      {{ form.value | json }} {{form.valid}}
+      <!-- {{ form.value | json }} {{form.valid}} -->
 
       <div class="line">
+        <label for="playersCount" class="label-description">Game Mode:</label>
         <div *ngFor="let option of options; let i=index">
           <div class="radio">
             <input type="radio" class="form-control" formControlName="playersCount" 
-              value="{{option.id}}" (click)="changeGameMode()" />
-            <label for="radio-{{option.id}}" class="label-radio">{{option.description}}</label>
+              value="{{option.id}}" (click)="changeGameMode()" [checked]="option.id == form.value.playersCount" />
+            <label for="radio-playersCount-{{option.id}}" class="label-radio">{{option.description}}</label>
           </div>
         </div>
       </div>
 
       <div class="line">
         <div class="element">
-          <label for="player1">Name P1:</label>
+          <label for="player1" class="label-description">Name Player 01:</label>
           <input formControlName="player1" class="form-control text" [readonly]="gameStarted" />
           <div *ngIf="player1?.valid">Required</div>
         </div>
-        <div *ngIf="form.value.playersCount == gameModeType.MULT_PLAYER" class="element">
-          <label for="player2">Name P2:</label>
+      </div>
+
+      <div *ngIf="form.value.playersCount == gameModeType.MULT_PLAYER" class="line">
+        <div  class="element">
+          <label for="player2" class="label-description">Name Player 02:</label>
           <input formControlName="player2" class="form-control text" [readonly]="gameStarted" />
           <div *ngIf="player2?.valid">Required</div>  
         </div>
       </div>
 
       <div *ngIf="form.value.playersCount == gameModeType.MULT_PLAYER" class="line word">
-          <label for="word">Player {{ playerTime % 2 != 0 ? '1' : '2' }}, type the word:</label>
-          <input type="password" formControlName="word" class="form-control text" [readonly]="!canTypeWord" />
-          <div *ngIf="word?.valid">Required</div>  
+        <label for="word" class="label-description">Player {{ playerTime % 2 != 0 ? '01' : '02' }}, type the word:</label>
+        <input type="password" formControlName="word" class="form-control text" [readonly]="!canTypeWord" />
+        <div *ngIf="word?.valid">Required</div>  
       </div>
 
       <div *ngIf="form.value.playersCount == gameModeType.SINGLE_PLAYER" class="line">
+        <label for="playersCount" class="label-description">Category:</label>
         <div *ngFor="let category of categories; let i=index">
           <div class="radio">
             <input type="radio" class="form-control" formControlName="category" 
-              value="{{category.id}}" (click)="changeCategory()" />
-            <label for="radio-{{category.id}}" class="label-radio">{{category.description}}</label>
+              value="{{category.id}}" (click)="changeCategory()" [checked]="category.id == form.value.category" />
+            <label for="radio-category-{{category.id}}" class="label-radio">{{category.description}}</label>
           </div>
         </div>
       </div>
