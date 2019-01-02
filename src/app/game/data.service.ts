@@ -12,6 +12,7 @@ export class DataService {
   public listOfWords: Word[] = [];
   public word: string;
   public tip: string;
+  public wordWhiteSpacesCount = 0;
 
   public namePlayer1: string;
   public namePlayer2: string;
@@ -22,10 +23,10 @@ export class DataService {
   public gameMode: GameModeEnum;
   public currentGameErrorsCount: number;
   public currentWordHits: number;
-  public gameCount: number = 0;
-  public playerTimeToAsk: number = 0;
-  
-  constructor(private globalEventsService: GlobalEventsService, private wordsService: WordsService) { 
+  public gameCount = 0;
+  public playerTimeToAsk = 0;
+
+  constructor(private globalEventsService: GlobalEventsService, private wordsService: WordsService) {
     this.resetVariables();
   }
 
@@ -45,8 +46,9 @@ export class DataService {
     this.resetVariables();
 
     this.word = typedWord.toUpperCase();
+    this.wordWhiteSpacesCount = this.word.length - this.word.replace(' ', '').length;
     this.tip = typedTip;
-    
+
     this.globalEventsService.startGame();
   }
 
@@ -59,9 +61,9 @@ export class DataService {
 
           const sortedIndex = Math.floor(Math.random() * this.listOfWords.length);
           this.word = this.listOfWords[sortedIndex].word.toUpperCase();
+          this.wordWhiteSpacesCount = this.word.length - this.word.replace(' ', '').length;
           this.tip = this.listOfWords[sortedIndex].tip;
 
-          
           this.globalEventsService.startGame();
         }
       );
@@ -69,7 +71,7 @@ export class DataService {
 
   public checkGameOver(): boolean {
     const endLoser = this.currentGameErrorsCount === 6;
-    const endWinner = this.currentWordHits == this.word.length;
+    const endWinner = this.currentWordHits === this.word.length - this.wordWhiteSpacesCount;
     const gameIsOver = endLoser || endWinner;
 
     if (gameIsOver) {
@@ -89,6 +91,6 @@ export class DataService {
   }
 
   public checkPlayer1TimeToAsk(): boolean {
-    return this.playerTimeToAsk % 2 == 0;
+    return this.playerTimeToAsk % 2 === 0;
   }
 }
