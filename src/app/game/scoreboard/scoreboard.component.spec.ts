@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { ScoreboardComponent } from './scoreboard.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ScoreboardComponent', () => {
   let component: ScoreboardComponent;
@@ -8,7 +10,9 @@ describe('ScoreboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScoreboardComponent ]
+      imports: [ HttpClientTestingModule ],
+      declarations: [ ScoreboardComponent ],
+      schemas: [NO_ERRORS_SCHEMA],
     })
     .compileComponents();
   }));

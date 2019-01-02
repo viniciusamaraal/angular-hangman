@@ -22,14 +22,6 @@ describe('DollComponent', () => {
   
         fixture.detectChanges();
       });
-  
-      it('should create', () => {
-        expect(ts).toBeTruthy();
-      });
-
-      it('should define game over', () => {
-        ts.imageId = 7;
-      });
     });
   
     describe('Component Tests', () => {
@@ -53,53 +45,7 @@ describe('DollComponent', () => {
         expect(imageElement.nativeElement.getAttribute('src')).toContain('hang-1');
       });
 
-      it('should display the picture of a hang with a man (body parts: head)', () => {
-        ts.imageId = 2;
-        fixture.detectChanges();
-        const imageElement = fixture.debugElement.query(By.css('.doll-image'));
-        
-        expect(imageElement.nativeElement.getAttribute('src')).toContain('hang-2');
-      });
-
-      it('should display the picture of a hang with a man (body parts: head and trunk)', () => {
-        ts.imageId = 3;
-        fixture.detectChanges();
-        const imageElement = fixture.debugElement.query(By.css('.doll-image'));
-        
-        expect(imageElement.nativeElement.getAttribute('src')).toContain('hang-3');
-      });
-
-      it('should display the picture of a hang with a man (body parts: head, trunk and left arm)', () => {
-        ts.imageId = 4;
-        fixture.detectChanges();
-        const imageElement = fixture.debugElement.query(By.css('.doll-image'));
-        
-        expect(imageElement.nativeElement.getAttribute('src')).toContain('hang-4');
-      });
-
-      it('should display the picture of a hang with a man (body parts: head, trunk, left arm and right arm)', () => {
-        ts.imageId = 5;
-        fixture.detectChanges();
-        const imageElement = fixture.debugElement.query(By.css('.doll-image'));
-        
-        expect(imageElement.nativeElement.getAttribute('src')).toContain('hang-5');
-      });
-
-      it('should display the picture of a hang with a man (body parts: head, trunk, left arm, right arm and left leg)', () => {
-        ts.imageId = 6;
-        fixture.detectChanges();
-        const imageElement = fixture.debugElement.query(By.css('.doll-image'));
-        
-        expect(imageElement.nativeElement.getAttribute('src')).toContain('hang-6');
-      });
-
-      it('should display the picture of a hang with a man (body parts: head, trunk, left arm, right arm, left leg and right leg)', () => {
-        ts.imageId = 7;
-        fixture.detectChanges();
-        const imageElement = fixture.debugElement.query(By.css('.doll-image'));
-        
-        expect(imageElement.nativeElement.getAttribute('src')).toContain('hang-7');
-      });
+      
     });
   });
   

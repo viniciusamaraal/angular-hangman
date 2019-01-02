@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { ContainerComponent } from './container.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -10,6 +11,7 @@ describe('ContainerComponent', () => {
   describe('Unit Tests', () => {
     beforeEach(async(() => {
       TestBed.configureTestingModule({
+        imports: [ HttpClientTestingModule ],
         declarations: [ContainerComponent],
         schemas: [NO_ERRORS_SCHEMA],
       }).compileComponents();
