@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 import { ContainerComponent } from './container/container.component';
 import { LetterBoxComponent } from './letter-box/letter-box.component';
@@ -29,8 +29,8 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
-    GameRoutingModule
+    GameRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [
     ContainerComponent
