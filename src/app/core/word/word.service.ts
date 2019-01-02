@@ -1,6 +1,6 @@
 
 import { Word } from './word.model';
-import { WORDS_API } from '../app.api';
+import { WORDS_API } from '../../app.api';
 import { CategoryEnum } from './category.enum';
 
 import { Injectable } from '@angular/core';

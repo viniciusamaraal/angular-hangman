@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { WordsService } from './word.service';
-import { Word } from './word.model';
+import { WordsService } from '../core/word/word.service';
+import { Word } from '../core/word/word.model';
 import { GameModeEnum } from './game-mode.enum';
 import { GlobalEventsService } from './global-events.service';
 

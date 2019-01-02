@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Word } from './game/word.model';
-import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
 
 @Component({
   selector: 'app-root',

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { DataService } from '../data.service';
 import { GlobalEventsService } from '../global-events.service';
 import { GameModeEnum } from '../game-mode.enum';
-import { CategoryEnum } from '../category.enum';
+import { CategoryEnum } from 'src/app/core/word/category.enum';
 
 @Component({
   selector: 'app-setup',
