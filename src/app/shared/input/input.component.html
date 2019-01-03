@@ -1,0 +1,11 @@
+<div class="input-container" [class.has-success]="hasSuccess()"
+                        [class.has-error]="hasError()">
+  <label for="inputSuccess" class="label-description"> {{label}}</label>
+  <div class="text">
+      <ng-content></ng-content>
+  </div>
+  <div class="feedback-message">
+      <span class="help-block" *ngIf="hasSuccess()"></span>
+      <span class="help-block" *ngIf="hasError()"><i class="fa fa-remove"></i>{{errorMessage}}</span>
+  </div>
+</div>

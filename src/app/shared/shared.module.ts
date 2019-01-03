@@ -3,16 +3,20 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { WordsService } from '../core/word/word.service';
+import { InputComponent } from './input/input.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    InputComponent
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule
   ],
   exports: [ 
     CommonModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    InputComponent
   ]
 })
 export class SharedModule { 
