@@ -1,21 +1,9 @@
-
 <div class="content-setup">
   <form [formGroup]="form">
-      <!-- {{ form.value | json }} {{form.valid}} -->
-
-      <div class="line">
-        <div class="radio-component">
-            <label class="radio-label" for="playersCount">Game Mode:</label>
-            <div class="radio-content">
-                <div *ngFor="let option of options; let i=index">
-                    <div class="radio">
-                      <input type="radio" class="form-control" formControlName="playersCount" 
-                        value="{{option.id}}" (click)="changeGameMode()" [checked]="option.id == form.value.playersCount" />
-                      <label for="radio-playersCount-{{option.id}}" class="label-specific-radio">{{option.description}}</label>
-                    </div>
-                  </div>
-            </div>
-        </div>
+      <div class="line" >
+        <app-radio class="element" formControlName="playersCount" (click)="checkCanChangeRadios()" [label]="'Game Mode:'" 
+          [identifier]="'playersCount'" [initialValue]="form.value.playersCount" [options]="gameModeOptions">
+        </app-radio>
       </div>
 
       <div class="line">
@@ -37,18 +25,9 @@
       </div>
 
       <div *ngIf="form.value.playersCount == gameModeType.SINGLE_PLAYER" class="line">
-        <div class="radio-component">
-            <label class="radio-label" for="categories">Category:</label>
-            <div class="radio-content">
-                <div *ngFor="let category of categories; let i=index">
-                    <div class="radio">
-                      <input type="radio" class="form-control" formControlName="category" 
-                        value="{{category.id}}" (click)="changeCategory()" [checked]="category.id == form.value.category" />
-                      <label for="radio-category-{{category.id}}" class="label-specific-radio">{{category.description}}</label>
-                    </div>
-                  </div>
-            </div>
-        </div>
+        <app-radio class="element" formControlName="category" (click)="checkCanChangeRadios()" [label]="'Category:'" 
+          [identifier]="'category'" [initialValue]="form.value.category" [options]="categoryOptions">
+        </app-radio>
       </div>
 
       <div class="line">

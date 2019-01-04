@@ -19,7 +19,7 @@ export class SetupComponent implements OnInit {
   public gameModeType = GameModeEnum;
   public playerTime: number;
 
-  options = [
+  gameModeOptions = [
     {
         id: GameModeEnum.SINGLE_PLAYER,
         description: "Single Player"
@@ -30,7 +30,7 @@ export class SetupComponent implements OnInit {
     }
   ];
 
-  categories = [
+  categoryOptions = [
     {
       id: CategoryEnum.ALL,
       description: "All"
@@ -139,13 +139,13 @@ export class SetupComponent implements OnInit {
   public startGame(): void {
     if (this.form.valid) {
       if (!this.gameStarted) {
-        const playersCount = this.form.get('playersCount').value;
-        const category = this.form.get('category').value;
-        const namePlayer1 = this.form.get('player1').value;
-        let namePlayer2 = this.form.get('player2').value;
-        namePlayer2 = namePlayer2 ? namePlayer2 : 'MACHINE';
+        const playersCount = this.form.get('playersCount');
+        const category = this.form.get('category');
+        const namePlayer1 = this.form.get('player1');
+        const namePlayer2 = this.form.get('player2');
+        let namePlayer2Value = namePlayer2.value ? namePlayer2.value : 'MACHINE';
 
-        this.dataService.setupGame(namePlayer1.toUpperCase(), namePlayer2.toUpperCase(), playersCount, category);
+        this.dataService.setupGame(namePlayer1.value.toUpperCase(), namePlayer2Value.toUpperCase(), playersCount.value, category.value);
 
         this.gameStarted = true;
       }
@@ -182,18 +182,13 @@ export class SetupComponent implements OnInit {
     window.location.reload();
   }
 
-  private changeGameMode() {
-    return !this.gameStarted;
-  }
-
-  private changeCategory() {
+  private checkCanChangeRadios() {
     return !this.gameStarted;
   }
 
   compareToValidator(controlToCompare: AbstractControl): ValidatorFn {
     return (control: AbstractControl): {[ key: string]: boolean} | null => {
       if (control.value === controlToCompare.value) {
-        console.log('123');
         return { "sameName": true };
       }
 
