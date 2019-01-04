@@ -1,0 +1,11 @@
+<div class="radio-component">
+    <label class="radio-label"> {{ label }}</label>
+    <div class="radio-content">
+        <div *ngFor="let option of options; let i=index">
+            <div class="radio">
+              <input type="radio" name="{{ identifier }}" (change)="onChange($event.target.value)" value="{{option.id}}" [checked]="option.id == initialValue" />
+              <label for="radio-{{ identifier }}-{{option.id}}" class="label-specific-radio">{{option.description}}</label>
+            </div>
+          </div>
+    </div>
+</div>

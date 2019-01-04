@@ -4,10 +4,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { WordsService } from '../core/word/word.service';
 import { InputComponent } from './input/input.component';
+import { RadioComponent } from './radio/radio.component';
 
 @NgModule({
   declarations: [
-    InputComponent
+    InputComponent,
+    RadioComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import { InputComponent } from './input/input.component';
   exports: [ 
     CommonModule,
     ReactiveFormsModule,
-    InputComponent
+    InputComponent,
+    RadioComponent
   ]
 })
 export class SharedModule { 

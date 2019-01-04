@@ -1,0 +1,17 @@
+.radio-component {
+    display: flex;
+}
+
+.radio-label {
+    flex: 2;
+    font-weight: bold;
+}
+
+.radio-content {
+    flex: 10;
+    display: flex;
+}
+
+.radio {
+    margin-right: 20px;
+}
