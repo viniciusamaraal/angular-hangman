@@ -47,21 +47,7 @@ describe('LetterBoxSelectableComponent', () => {
       ts.letter = { value: 'L', display: true };
       fixture.detectChanges();
       const divContent = (<Element>fixture.debugElement.query(By.css('.letter-box')).nativeElement).textContent.trim();
-      // const divContent2 = (<Element>fixture.debugElement.nativeElement).querySelector('.letter-box').textContent.trim();
-      // console.log(divContent + ' ' + divContent2);
       expect(divContent).toEqual('L');
     });
-
-    // it('should mouse over', () => {
-    //   ts.letter = { value: 'L', display: true };
-    //   fixture.detectChanges();
-      
-    //   const debugElement = fixture.debugElement.queryAll(By.directive(LetterBoxSelectableComponent));
-    //   // debugElement.triggerEventHandler('onmouseover', { pageX:50, pageY: 40 });
-    //   // fixture.detectChanges();
-
-    //   // console.log(debugElement.nativeElement.style);
-    //   // expect(debugElement.nativeElement.style.backgroundColor).toBe('000');
-    // });
   });
 });
