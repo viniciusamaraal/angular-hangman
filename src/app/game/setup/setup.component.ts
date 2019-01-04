@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 
 import { DataService } from '../data.service';
 import { GlobalEventsService } from '../global-events.service';
@@ -62,8 +62,14 @@ export class SetupComponent implements OnInit {
     this.playerTime = this.dataService.playerTimeToAsk;
     
     this.form = this.formBuilder.group({
-      player1: [ '', Validators.required ],
-      player2: [ '' ], 
+      player1: [ '', 
+        Validators.compose([ 
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(15), 
+          Validators.pattern('[a-zA-Z ]*')
+        ])],
+      player2: [ '', ], 
       word: [ '' ],
       playersCount: [ GameModeEnum.SINGLE_PLAYER ],
       category: [ CategoryEnum.ALL ]
@@ -79,20 +85,53 @@ export class SetupComponent implements OnInit {
   }
 
   private setFormMultPlayer(value: string): void {
+    const fldPlayer1 = this.form.get('player1');
     const fldPlayer2 = this.form.get('player2');
     const fldWord = this.form.get('word');
 
-    if (value == "mult_player") {
-      fldPlayer2.setValidators(Validators.required);
-      fldWord.setValidators(Validators.required);
+    if (value === String(GameModeEnum.MULT_PLAYER)) {
+      fldPlayer1.setValidators(
+        Validators.compose([ 
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(15), 
+          Validators.pattern('[a-zA-Z ]*'),
+          this.compareToValidator(this.form.get('player2'))
+        ]));
+
+      fldPlayer2.setValidators(
+        Validators.compose([ 
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(15),
+          Validators.pattern('[a-zA-Z ]*'),
+          this.compareToValidator(this.form.get('player1'))
+        ]));
+      fldWord.setValidators(
+        Validators.compose([ 
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(20),
+          Validators.pattern('[a-zA-Z ]*') 
+        ]));
     } else {
       fldPlayer2.setValue('');
       fldWord.setValue('');
+
+      fldPlayer1.clearValidators();
+      fldPlayer1.setValidators(
+        Validators.compose([ 
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(15), 
+          Validators.pattern('[a-zA-Z ]*')
+        ]));
 
       fldPlayer2.clearValidators();
       fldWord.clearValidators();
     }
     
+    fldPlayer1.updateValueAndValidity();
     fldPlayer2.updateValueAndValidity();
     fldWord.updateValueAndValidity();
   }
@@ -149,5 +188,16 @@ export class SetupComponent implements OnInit {
 
   private changeCategory() {
     return !this.gameStarted;
+  }
+
+  compareToValidator(controlToCompare: AbstractControl): ValidatorFn {
+    return (control: AbstractControl): {[ key: string]: boolean} | null => {
+      if (control.value === controlToCompare.value) {
+        console.log('123');
+        return { "sameName": true };
+      }
+
+      return null;
+    }
   }
 }

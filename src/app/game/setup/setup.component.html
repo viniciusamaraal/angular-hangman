@@ -4,46 +4,50 @@
       <!-- {{ form.value | json }} {{form.valid}} -->
 
       <div class="line">
-        <label for="playersCount" class="label-description">Game Mode:</label>
-        <div *ngFor="let option of options; let i=index">
-          <div class="radio">
-            <input type="radio" class="form-control" formControlName="playersCount" 
-              value="{{option.id}}" (click)="changeGameMode()" [checked]="option.id == form.value.playersCount" />
-            <label for="radio-playersCount-{{option.id}}" class="label-radio">{{option.description}}</label>
-          </div>
+        <div class="radio-component">
+            <label class="radio-label" for="playersCount">Game Mode:</label>
+            <div class="radio-content">
+                <div *ngFor="let option of options; let i=index">
+                    <div class="radio">
+                      <input type="radio" class="form-control" formControlName="playersCount" 
+                        value="{{option.id}}" (click)="changeGameMode()" [checked]="option.id == form.value.playersCount" />
+                      <label for="radio-playersCount-{{option.id}}" class="label-specific-radio">{{option.description}}</label>
+                    </div>
+                  </div>
+            </div>
         </div>
       </div>
 
       <div class="line">
-        <div class="element">
-          <label for="player1" class="label-description">Name Player 01:</label>
-          <input formControlName="player1" class="form-control text" [readonly]="gameStarted" />
-          <div *ngIf="player1?.valid">Required</div>
-        </div>
+        <app-input errorMessage="Required, with length between 4 and 15 characters." label="Player 01 Name:" class="element">
+            <input formControlName="player1" [readonly]="gameStarted">
+        </app-input>
       </div>
 
       <div *ngIf="form.value.playersCount == gameModeType.MULT_PLAYER" class="line">
-        <div  class="element">
-          <label for="player2" class="label-description">Name Player 02:</label>
-          <input formControlName="player2" class="form-control text" [readonly]="gameStarted" />
-          <div *ngIf="player2?.valid">Required</div>  
-        </div>
+        <app-input errorMessage="Required, with length between 4 and 15 characters." label="Player 02 Name:" class="element">
+            <input formControlName="player2" [readonly]="gameStarted">
+        </app-input>
       </div>
 
       <div *ngIf="form.value.playersCount == gameModeType.MULT_PLAYER" class="line word">
-        <label for="word" class="label-description">Player {{ playerTime % 2 != 0 ? '01' : '02' }}, type the word:</label>
-        <input type="password" formControlName="word" class="form-control text" [readonly]="!canTypeWord" />
-        <div *ngIf="word?.valid">Required</div>  
+        <app-input errorMessage="Required, with length between 4 and 20 characters." label="Type the word, Player {{ playerTime % 2 != 0 ? '01' : '02' }}:" class="element">
+          <input type="password" formControlName="word" [readonly]="!canTypeWord">
+        </app-input>
       </div>
 
       <div *ngIf="form.value.playersCount == gameModeType.SINGLE_PLAYER" class="line">
-        <label for="playersCount" class="label-description">Category:</label>
-        <div *ngFor="let category of categories; let i=index">
-          <div class="radio">
-            <input type="radio" class="form-control" formControlName="category" 
-              value="{{category.id}}" (click)="changeCategory()" [checked]="category.id == form.value.category" />
-            <label for="radio-category-{{category.id}}" class="label-radio">{{category.description}}</label>
-          </div>
+        <div class="radio-component">
+            <label class="radio-label" for="categories">Category:</label>
+            <div class="radio-content">
+                <div *ngFor="let category of categories; let i=index">
+                    <div class="radio">
+                      <input type="radio" class="form-control" formControlName="category" 
+                        value="{{category.id}}" (click)="changeCategory()" [checked]="category.id == form.value.category" />
+                      <label for="radio-category-{{category.id}}" class="label-specific-radio">{{category.description}}</label>
+                    </div>
+                  </div>
+            </div>
         </div>
       </div>
 

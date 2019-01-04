@@ -19,24 +19,23 @@
   height: 30px;
 }
 
+
+
+.radio-component {
+  display: flex;
+  flex: 1;
+}
+
+.radio-label {
+  flex: 2;
+  font-weight: bold;
+}
+
+.radio-content {
+  flex: 10;
+  display: flex;
+}
+
 .radio {
   margin-right: 20px;
-}
-
-input {
-  margin-left: 5px;
-}
-
-.label-description {
-  width: 15%;
-  font-weight: bold;
-  display: inline-block;
-}
-
-.label-radio {
-  margin-left: 5px;
-}
-
-.text {
-  width: 30%;
 }
