@@ -69,10 +69,10 @@ export class SetupComponent implements OnInit {
           Validators.maxLength(15), 
           Validators.pattern('[a-zA-Z ]*')
         ])],
-      player2: [ '', ], 
+      player2: [ '' ], 
       word: [ '' ],
-      playersCount: [ GameModeEnum.SINGLE_PLAYER ],
-      category: [ CategoryEnum.ALL ]
+      playersCount: [ '' ], // GameModeEnum.SINGLE_PLAYER
+      category: [ '' ] // CategoryEnum.ALL
     });
 
     this.form.get('playersCount').valueChanges.subscribe(value => 

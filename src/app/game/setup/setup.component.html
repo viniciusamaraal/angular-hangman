@@ -1,5 +1,6 @@
 <div class="content-setup">
   <form [formGroup]="form">
+      {{ form.value | json }} {{form.valid}}
       <div class="line" >
         <app-radio class="element" formControlName="playersCount" (click)="checkCanChangeRadios()" [label]="'Game Mode:'" 
           [identifier]="'playersCount'" [initialValue]="form.value.playersCount" [options]="gameModeOptions">
@@ -10,7 +11,7 @@
         <app-input errorMessage="Required, with length between 4 and 15 characters." label="Player 01 Name:" class="element">
             <input formControlName="player1" [readonly]="gameStarted">
         </app-input>
-      </div>
+      </div> 
 
       <div *ngIf="form.value.playersCount == gameModeType.MULT_PLAYER" class="line">
         <app-input errorMessage="Required, with length between 4 and 15 characters." label="Player 02 Name:" class="element">
@@ -19,7 +20,8 @@
       </div>
 
       <div *ngIf="form.value.playersCount == gameModeType.MULT_PLAYER" class="line word">
-        <app-input errorMessage="Required, with length between 4 and 20 characters." label="Type the word, Player {{ playerTime % 2 != 0 ? '01' : '02' }}:" class="element">
+        <app-input errorMessage="Required, with length between 4 and 20 characters." 
+          label="Type the word, Player {{ playerTime % 2 != 0 ? '01' : '02' }}:" class="element">
           <input type="password" formControlName="word" [readonly]="!canTypeWord">
         </app-input>
       </div>

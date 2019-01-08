@@ -49,7 +49,7 @@ export class ContainerComponent implements OnInit, OnDestroy {
   private loadWord(): void {
     this.word = [];
     
-    var splitedWord = this.dataService.word.split('');
+    var splitedWord = this.dataService.word.split('');    
     splitedWord.forEach((element, index) => {
       this.word.push({ value: splitedWord[index], display:  false });
     });
